@@ -1,0 +1,17 @@
+
+.outerContainer{
+  padding:5px;
+  border:1px solid #b6b6b6;
+  box-sizing: content-box;
+}
+
+div.container{
+  margin-bottom: 10px;
+}
+
+div.container > div{
+  height: 100%;
+  width: 100%;
+
+}
+

@@ -1,0 +1,51 @@
+
+<h2>{{_config.getTituloTabla() }}</h2>
+<h4>{{_config.getSubTituloTabla() }}</h4>
+
+<div *ngIf="_config.getFiltro()">
+<mat-form-field appearance="fill" style="margin-top:2% ;">
+  <mat-label>Buscar</mat-label>
+  <input matInput  [(ngModel)]="_sFiltro" (keyup)="OnKeyUp($event)" placeholder="Ingrese algun texto" >   
+  <button matRipple *ngIf="_sFiltro"  matSuffix mat-icon-button  aria-label="Clear" (click)="onClearInputSearch()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
+</div>
+
+<table mat-table [dataSource]="_config.getMatTableDataSource()" matSort >
+
+  <ng-container matColumnDef="{{column}}" *ngFor="let column of _config.getTitulos(); let i = index">
+    {{_config.getTituloAcciones()}}
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>{{column}}</b> </th>
+		<td mat-cell *matCellDef="let element" >
+      
+      <div *ngIf="column==_config.getTituloAcciones(); else elseBlock">
+        <ng-container  *ngFor="let btn of _config.getActionButtons();">
+          <button mat-button [color]="btn.color" (click)="fnClickBotton(btn,element)" >
+            <mat-icon class="material-icons">{{btn.icon}}</mat-icon>
+          </button>
+        </ng-container>
+      </div>
+      <ng-template #elseBlock> {{ element[_config.getCampoJson(i)] }} </ng-template>  
+      
+        
+    </td>
+  
+  </ng-container>
+  
+  <tr mat-header-row *matHeaderRowDef="_config.getTitulos()"></tr>
+  <tr mat-row matRipple [matRippleRadius]="32" 
+  *matRowDef="let elemento; columns: _config.getTitulos();"
+  (click)="fnClickRow(elemento)"
+  >
+  </tr>
+
+</table>
+
+
+<mat-paginator 
+  [pageSizeOptions]= "_config.getPageSizeOptions()"
+  [length]="_config.getResultsLength()" 
+  [pageSize]="_config.getLengthPageMatTable()"  
+  showFirstLastButtons>
+</mat-paginator>

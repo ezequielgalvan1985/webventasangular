@@ -1,0 +1,35 @@
+<mat-card>
+  <form  [formGroup]="_formulario" class="example-form" (ngSubmit)="onSubmit()">
+
+  <mat-card-title>Bienvenido</mat-card-title>
+  <mat-card-subtitle>Ingresar al sistema</mat-card-subtitle>
+  <mat-card-content>
+
+
+    <table class="example-full-width" cellspacing="0">
+        <tr>
+        <td><mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Usuario:</mat-label>
+          <input matInput id="usernameOrEmail" type="text" formControlName="usernameOrEmail">
+        </mat-form-field></td>
+        </tr>
+        <tr>
+        <td>
+          <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Contraseña:</mat-label>
+
+          <input matInput id="password" type="password" formControlName="password">
+        </mat-form-field></td>
+      </tr>
+    </table>
+
+  </mat-card-content>
+  <mat-card-actions>
+
+    <button mat-raised-button color="primary">Ingresar</button>
+    <button mat-raised-button>Volver</button>
+  </mat-card-actions>
+
+</form>
+
+</mat-card>

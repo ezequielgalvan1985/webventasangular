@@ -1,0 +1,28 @@
+<div class="outerContainer">
+  <div fxLayout="row" fxLayoutGap="10px" fxLayout.sm="column"class="container">
+  <div fxFlex="20" fxLayoutAlign="start start" >
+  </div>
+  <div fxFlex="60" fxLayoutAlign="start start">
+    <div fxLayout="column" fxLayoutGap="10px" fxFlex="80">
+    <mat-card>
+      <mat-card-title>Catalogos</mat-card-title>
+      <mat-card-subtitle>Listado</mat-card-subtitle>
+      <mat-divider ></mat-divider>
+
+      <div fxLayout="row" fxLayoutGap="10px" fxLayout.sm="column" style="margin-top: 5%;">
+        <button  mat-stroked-button type="button" (click)="fnNuevo()" color="primary" matTooltip="Crear Registro">Nuevo <mat-icon>save</mat-icon> </button>
+      </div>
+
+
+    <tabla-flex [config]="_config"
+          [registros]="_registros"
+          (onClickButton)="onClickButton($event)"
+
+          >
+    </tabla-flex>
+  </mat-card>
+  </div>
+  </div>
+
+
+</div>

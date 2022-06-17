@@ -1,0 +1,45 @@
+<mat-toolbar>
+  <button (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>My App</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon>favorite</mat-icon>
+  </button>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>share</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+
+    <mat-selection-list #shoes [multiple]="false">
+      <mat-list-option value="menu1" >
+
+        <a matButton routerLink="/dashboard">Dashboard</a>
+      </mat-list-option>
+      <mat-list-option value="login" >
+        <a matButton routerLink="/login">Login</a>
+      </mat-list-option>
+      <mat-list-option value="prueba" >
+        <a matButton routerLink="/prueba">Prueba</a>
+      </mat-list-option>
+      <mat-list-option value="categorias" >
+        <a matButton routerLink="/categorias">Categorias</a>
+      </mat-list-option>
+
+    </mat-selection-list>
+
+
+
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <router-outlet></router-outlet>
+  </div>
+
+</mat-drawer-container>
+
+

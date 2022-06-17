@@ -1,0 +1,57 @@
+<div class="outerContainer">
+  <div fxLayout="row" fxLayoutGap="10px" fxLayout.sm="column"class="container">
+    <div fxFlex="10" fxLayoutAlign="start start" >
+    </div>
+    <div fxFlex="80" fxLayoutAlign="start start">
+      <div fxLayout="column" fxLayoutGap="10px" class="container">
+
+        <mat-card>
+          <mat-card-title>Catalogos</mat-card-title>
+          <mat-card-subtitle>{{_accion_desc }}  </mat-card-subtitle>
+          <mat-divider ></mat-divider>
+
+          <mat-card-content style="margin-top: 5%;">
+            <form [formGroup]="_formulario" class="form-fill-color-red" (ngSubmit)="onClickBtnGuardar()">
+
+              <mat-form-field class="example-25-width" appearance="fill"  >
+                <mat-label>Codigo</mat-label>
+                <input matInput formControlName="id">
+              </mat-form-field>
+
+              <mat-form-field class="example-75-width" appearance="fill"  >
+                <mat-label>Nombre</mat-label>
+                <input matInput formControlName="nombre">
+              </mat-form-field>
+
+              <mat-form-field class="example-75-width" appearance="fill"  >
+                <mat-label>Descripcion</mat-label>
+                <input matInput formControlName="descripcion">
+              </mat-form-field>
+
+              <mat-form-field class="example-25-width" appearance="fill"  >
+                <mat-label>Estado</mat-label>
+                <input matInput formControlName="estado">
+              </mat-form-field>
+
+              <button mat-stroked-button type="button" mat-tooltip="Volver"  (click)="fnVolver()" matTooltip="Volver a la Pagina Anterior"><mat-icon>reply</mat-icon> Volver </button>
+
+              <button mat-stroked-button type="submit"  style="float:right" color="primary" matTooltip="Guardar Cambios">Guardar <mat-icon>save</mat-icon> </button>
+
+            </form>
+
+            </mat-card-content>
+          <mat-divider></mat-divider>
+          <mat-card-actions>
+
+            <button mat-stroked-button type="button" (click)="fnDelete()" color="warn" style="float:left" matTooltip="Eliminar Registro">Eliminar <mat-icon>remove_circle_outline</mat-icon> </button>
+
+          </mat-card-actions>
+        </mat-card>
+
+        </div>
+      </div>
+      <div fxFlex="10" fxLayoutAlign="start start" >
+
+      </div>
+    </div>
+    </div>
