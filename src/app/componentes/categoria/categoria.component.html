@@ -8,21 +8,15 @@
       <mat-card-title>Catalogos</mat-card-title>
       <mat-card-subtitle>Listado</mat-card-subtitle>
       <mat-divider ></mat-divider>
-
       <div fxLayout="row" fxLayoutGap="10px" fxLayout.sm="column" style="margin-top: 5%;">
         <button  mat-stroked-button type="button" (click)="fnNuevo()" color="primary" matTooltip="Crear Registro">Nuevo <mat-icon>save</mat-icon> </button>
       </div>
-
-
     <tabla-flex [config]="_config"
           [registros]="_registros"
-          (onClickButton)="onClickButton($event)"
-
-          >
+          (onClickButton)="onClickButton($event)">
     </tabla-flex>
-  </mat-card>
+    </mat-card>
+    </div>
   </div>
-  </div>
-
-
+</div>
 </div>

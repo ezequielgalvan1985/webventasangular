@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CategoriaDTO, CategoriaService } from 'src/app/services/categorias.service';
 import { ActionButton, ConfigTablaFlex } from '../tabla-flex/ConfigTablaFlex';
 import { Location } from '@angular/common';
+import { TokenService } from 'src/app/services/token.service';
+
 @Component({
   selector: 'app-categoria',
   templateUrl: './categoria.component.html',
@@ -21,11 +23,14 @@ export class CategoriaComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private _snackBar: MatSnackBar,
+    private tokenService: TokenService
     )
     {
       this._config
-      .addTitulo('Codigo').addCampoJson('codigo')
-      .addTitulo('Descripcion').addCampoJson('valor')
+      .addTitulo('Codigo').addCampoJson('id')
+      .addTitulo('Nombre').addCampoJson('nombre')
+      .addTitulo('Descripcion').addCampoJson('descripcion')
+      .addTitulo('Estado').addCampoJson('estado')
       .setTituloAcciones('Acciones')
       .addActionButton(new ActionButton('Editar', 'primary','edit'))
       .setPageSizeOptions([5, 10, 15])
@@ -41,6 +46,7 @@ export class CategoriaComponent implements OnInit {
   fnFindAll(){
     this._api.findAll()
       .subscribe((r: Array<CategoriaDTO>)=> {
+        debugger;
         this._registros = r;
         this._loading = false;
     },

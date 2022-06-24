@@ -8,10 +8,10 @@
 }
 
 .example-sidenav-content {
-  display: flex;
+  display: inline;
   height: 100%;
-  align-items: flex-start;
-  justify-content: flex-start;
+
+
 }
 
 .example-sidenav {

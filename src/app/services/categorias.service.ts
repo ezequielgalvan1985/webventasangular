@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
+import { ConfigService } from '../config/config';
+import { TokenService } from './token.service';
 
 
 export interface CategoriaDTO{
@@ -19,21 +21,29 @@ export interface ResponseDTO{
   status:number,
   message:string
 }
-
+export interface ErrorDTO{
+  error:number,
+  message:string
+}
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriaService {
+  _configService!:ConfigService;
+  _urlBase='http://localhost:8080/v1/';
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
-
+  _currentError!:ErrorDTO;
 constructor(private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
-    private _snackBar: MatSnackBar,
-    private location:Location
-    ) { }
-  _urlBase='http://localhost:8080/v1/';
+    private location:Location,
+    private tokenService:TokenService,
+
+    ) {
+
+
+    }
 
 
   post(p:CategoriaDTO):Observable<ResponseDTO> {
@@ -59,7 +69,9 @@ constructor(private http: HttpClient,
 
   findAll():Observable<Array<CategoriaDTO>> {
     var url = this._urlBase + 'categorias';
-    return this.http.get<Array<CategoriaDTO>>(url).pipe(catchError(this.handleError));
+
+
+    return this.http.get<Array<CategoriaDTO>>(url);
   }
 
   findById(p:number):Observable<CategoriaDTO>{
@@ -68,7 +80,7 @@ constructor(private http: HttpClient,
   }
 
   private handleError(error: HttpErrorResponse) {
-    debugger;
+
 
     if (error.status===401){
       //this._snackBar.open('Sesion de usuario expirada, por favor volver a loguearse', 'cerrar',{horizontalPosition: this.horizontalPosition,verticalPosition: this.verticalPosition,});
@@ -81,7 +93,11 @@ constructor(private http: HttpClient,
       alert('Pagina no existe');
       console.error('Pagina no existe', error.error);
     }
+    if (error.status===403){
 
+      console.error('No tiene privilegios', error.error);
+
+    }
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error);

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoriaDTO, CategoriaService } from 'src/app/services/categorias.service';
 import { Location } from '@angular/common';
 
@@ -12,7 +12,7 @@ import { Location } from '@angular/common';
 })
 export class CategoriaFormComponent implements OnInit {
   _formulario = new FormGroup({
-    id: new FormControl('',  Validators.required),
+    id: new FormControl('  ',  Validators.required),
     nombre: new FormControl('',  Validators.required),
     descripcion: new FormControl('',),
     estado: new FormControl('', Validators.required)
@@ -28,7 +28,8 @@ export class CategoriaFormComponent implements OnInit {
   constructor(private _api: CategoriaService,
     private route: ActivatedRoute,
     private _snackBar: MatSnackBar,
-    private location:Location
+    private location:Location,
+    private router: Router
     ) { }
 
   ngOnInit() {
@@ -75,12 +76,13 @@ export class CategoriaFormComponent implements OnInit {
 
 
   fnPatch(){
+    console.log(this._formulario.value);
     this._api.patch(this._formulario.value)
     .subscribe(()=> {
       this._snackBar.open('Actualizado Correctamente', 'cerrar',{horizontalPosition: this.horizontalPosition,verticalPosition: this.verticalPosition,});
+      this.fnVolver();
     },
     (err)=>{
-
       this._loading = false;
       this._snackBar.open('Error: '+err.message, 'cerrar',{horizontalPosition: this.horizontalPosition,verticalPosition: this.verticalPosition,});
       console.log('Error' + err.menssage);}
@@ -93,7 +95,13 @@ export class CategoriaFormComponent implements OnInit {
     .subscribe(()=> {
       this._snackBar.open('Creado Correctamente', 'cerrar',{horizontalPosition: this.horizontalPosition,verticalPosition: this.verticalPosition,});
       this._loading = false;
-    })
+      this.fnVolver();
+    },
+    (err)=>{
+      this._loading = false;
+      this._snackBar.open('Error: '+err.message, 'cerrar',{horizontalPosition: this.horizontalPosition,verticalPosition: this.verticalPosition,});
+      console.log('Error' + err.menssage);}
+    );
   }
 
 

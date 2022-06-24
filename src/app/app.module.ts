@@ -27,7 +27,7 @@ import {MatSortModule} from '@angular/material/sort';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './componentes/dashboard/dashboard.component';
 
-import { LoginComponent } from './componentes/login/login.component';
+import { LoginComponent } from './auth/login.component';
 import { PruebaComponent } from './componentes/prueba/prueba.component';
 import { RegisterComponent } from './componentes/register/register.component';
 import { HomeComponent } from './componentes/home/home.component';
@@ -35,6 +35,8 @@ import { MarketplaceComponent } from './componentes/marketplace/marketplace.comp
 import { CategoriaComponent } from './componentes/categoria/categoria.component';
 import { CategoriaFormComponent } from './componentes/categoria-form/categoria-form.component';
 import { TablaFlexComponent } from './componentes/tabla-flex/tabla-flex.component';
+import { MenuComponent } from './menu/menu.component';
+import { interceptorProvider } from './interceptors/prod-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,7 @@ import { TablaFlexComponent } from './componentes/tabla-flex/tabla-flex.componen
     CategoriaComponent,
     CategoriaFormComponent,
     TablaFlexComponent,
-
+    MenuComponent
 
   ],
   imports: [
@@ -59,6 +61,7 @@ import { TablaFlexComponent } from './componentes/tabla-flex/tabla-flex.componen
     MatButtonModule,
     BrowserAnimationsModule,
     MatCardModule,
+
     MatInputModule,
     FlexLayoutModule,
     MatSidenavModule,
@@ -72,10 +75,11 @@ import { TablaFlexComponent } from './componentes/tabla-flex/tabla-flex.componen
     MatSnackBarModule,
     MatTableModule,
     MatTabsModule,
-    MatSortModule
+    MatSortModule,
+
   ],
 
-  providers: [],
+  providers: [interceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

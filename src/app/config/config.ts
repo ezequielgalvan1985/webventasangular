@@ -1,18 +1,18 @@
-export  class Config {
-  static instance: Config;
+export  class ConfigService {
+  static instance: ConfigService;
 
   tokenUserLogued!:string;
   constructor(){
-    if (!Config.instance) {
-      Config.instance = this;
+    if (!ConfigService.instance) {
+      ConfigService.instance = this;
     }
-    return Config.instance;
+    return ConfigService.instance;
   }
 
-  setToken(p:string){
+  setTokenSession(p:string){
     this.tokenUserLogued = p;
   }
-  getToken(){
+  getTokenSession(){
     return this.tokenUserLogued;
   }
 }
