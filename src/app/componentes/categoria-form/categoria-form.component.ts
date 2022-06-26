@@ -4,6 +4,8 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoriaDTO, CategoriaService } from 'src/app/services/categorias.service';
 import { Location } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalMessageComponent } from '../modal-message/modal-message.component';
 
 @Component({
   selector: 'app-categoria-form',
@@ -24,12 +26,14 @@ export class CategoriaFormComponent implements OnInit {
   _loading!:boolean;
   _currentId!:number
   _currentModel!:CategoriaDTO;
+  _modalMessageResponse!:string;
 
   constructor(private _api: CategoriaService,
     private route: ActivatedRoute,
     private _snackBar: MatSnackBar,
     private location:Location,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
     ) { }
 
   ngOnInit() {
@@ -106,7 +110,31 @@ export class CategoriaFormComponent implements OnInit {
 
 
   fnDelete(){
-    alert("fnDelete");
+
+      const dialogRef = this.dialog.open(ModalMessageComponent, {
+        width: '250px',
+        data: {tipo: 'C', message: '¿Esta seguro desea Eliminar?'},
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+
+        this._modalMessageResponse = result;
+          if (this._modalMessageResponse == "S"){
+            this._api.delete(this._formulario.controls['id'].value )
+            .subscribe(()=> {
+              this._snackBar.open('Eliminado Correctamente', 'cerrar',{horizontalPosition: this.horizontalPosition,verticalPosition: this.verticalPosition,});
+              this._loading = false;
+              this.fnVolver();
+            },
+            (err)=>{
+              this._loading = false;
+              this._snackBar.open('Error: '+err.message, 'cerrar',{horizontalPosition: this.horizontalPosition,verticalPosition: this.verticalPosition,});
+              console.log('Error' + err.menssage);}
+          );
+        }
+
+      });
+
   }
 
   fnVolver(){

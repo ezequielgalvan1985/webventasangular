@@ -37,6 +37,7 @@ import { CategoriaFormComponent } from './componentes/categoria-form/categoria-f
 import { TablaFlexComponent } from './componentes/tabla-flex/tabla-flex.component';
 import { MenuComponent } from './menu/menu.component';
 import { interceptorProvider } from './interceptors/prod-interceptor.service';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { interceptorProvider } from './interceptors/prod-interceptor.service';
     MatTableModule,
     MatTabsModule,
     MatSortModule,
+    MatDialogModule
 
   ],
 

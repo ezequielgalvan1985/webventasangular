@@ -1,0 +1,12 @@
+
+<mat-form-field class="example-15-width"  appearance="fill" (keyup)="onKeyUp($event)">
+<mat-label>{{_labelCodigo}}</mat-label>
+<input matInput placeholder="{{_labelCodigo}}"  name="Codigo" [(ngModel)]="_codigo" >
+</mat-form-field>
+<button type="button" matTooltip="Buscar" mat-button color="primary"  matTooltip="Buscar" (click)="onClickBuscar()"> <mat-icon class="material-icons color_primary">search</mat-icon></button>
+
+<mat-form-field class="example-75-width"  appearance="fill">
+  <mat-label>Descripcion</mat-label>
+  <input readonly matInput placeholder="Descripcion"  name="Descripcion" [(ngModel)]="_descripcion">
+</mat-form-field>
+              
