@@ -40,9 +40,11 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(): void {
+    debugger;
     this.loginUsuario = new LoginUsuario(this.nombreUsuario, this.password);
     this.authService.login(this.loginUsuario).subscribe(
       data => {
+        debugger;
         this.isLogged = true;
 
         this.tokenService.setToken(data.token);
@@ -58,7 +60,7 @@ export class LoginComponent implements OnInit {
         this.isLogged = false;
         this.errMsj = err.error.message;
 
-         console.log(err.error.message);
+         console.log(err);
       }
     );
   }

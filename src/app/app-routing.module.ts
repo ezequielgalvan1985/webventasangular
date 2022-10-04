@@ -10,13 +10,15 @@ import { PruebaComponent } from './componentes/prueba/prueba.component';
 import { ProdGuardService as guard } from './guards/prod-guard.service';
 
 const appRoutes: Routes = [
-  { path: '', component: DashboardComponent },
+  { path: '', component: DashboardComponent, },
   { path: 'login', component: LoginComponent },
+
   { path: 'prueba', component: PruebaComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'categorias', component: CategoriaComponent,canActivate: [guard], data: { expectedRol: ['admin', 'user'] } },
   { path: 'categorias/add', component: CategoriaFormComponent },
   { path: 'categorias/edit/:id', component: CategoriaFormComponent },
+
 ];
 
 @NgModule({
